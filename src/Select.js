@@ -163,8 +163,12 @@ const Select = React.createClass({
 	},
 
 	getInitialState () {
+		const inputValue = this.props.useValueAsInputValue ?
+			this.getValueArray(this.props.value)[0] :
+			'';
+		
 		return {
-			inputValue: '',
+			inputValue: inputValue,
 			isFocused: false,
 			isOpen: false,
 			isPseudoFocused: false,
@@ -406,7 +410,6 @@ const Select = React.createClass({
 			this.setState({
 				isOpen: false,
 				isPseudoFocused: this.state.isFocused && !this.props.multi,
-				inputValue: this.state.inputValue
 			});
 		}
 		this.hasScrolledToOption = false;
@@ -622,7 +625,6 @@ const Select = React.createClass({
 		} else {
 			this.setState({
 				isOpen: false,
-				inputValue: '',
 				isPseudoFocused: this.state.isFocused,
 			}, () => {
 				this.setValue(value);
